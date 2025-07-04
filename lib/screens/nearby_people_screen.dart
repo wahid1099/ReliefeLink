@@ -175,7 +175,7 @@ class NearbyPeopleScreen extends StatelessWidget {
             children: [
               _StatusTab(label: 'Status', selected: true),
               _StatusTab(label: 'Distance'),
-              _StatusTab(label: 'Role'),
+              _StatusTab(label: 'Need help'),
             ],
           ),
           const SizedBox(height: 8),
