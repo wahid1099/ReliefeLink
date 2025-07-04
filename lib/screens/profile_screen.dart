@@ -57,7 +57,7 @@ class _ProfileTab extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             const Text(
-              'Sharmin Akter',
+              'MD WAHID',
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
             ),
             const SizedBox(height: 6),
@@ -68,7 +68,7 @@ class _ProfileTab extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12),
               ),
               child: const Text(
-                'Field Coordinator',
+                'SAFEMODE',
                 style: TextStyle(
                   color: Colors.red,
                   fontWeight: FontWeight.w500,
@@ -106,7 +106,10 @@ class _ProfileTab extends StatelessWidget {
         // Language
         const Text(
           'LANGUAGE',
-          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.grey),
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Color.fromARGB(255, 244, 241, 241),
+          ),
         ),
         const SizedBox(height: 8),
         Card(

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:latlong2/latlong.dart';
 
 class NearbyPeopleScreen extends StatelessWidget {
   const NearbyPeopleScreen({super.key});
@@ -7,7 +9,7 @@ class NearbyPeopleScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final people = [
       {
-        'name': 'Sarah Chen',
+        'name': 'MD WAHID',
         'role': 'Medical',
         'distance': '15m',
         'status': 'Needs Help',
@@ -16,7 +18,7 @@ class NearbyPeopleScreen extends StatelessWidget {
         'isHelp': true,
       },
       {
-        'name': 'Michael Rodriguez',
+        'name': 'TANVIR ISLAM',
         'role': 'Volunteer',
         'distance': '30m',
         'status': 'Available',
@@ -25,7 +27,7 @@ class NearbyPeopleScreen extends StatelessWidget {
         'isHelp': false,
       },
       {
-        'name': 'David Kim',
+        'name': 'ZARIR ISLAM',
         'role': 'Rescue',
         'distance': '50m',
         'status': 'Online',
@@ -34,7 +36,7 @@ class NearbyPeopleScreen extends StatelessWidget {
         'isHelp': false,
       },
       {
-        'name': 'Lisa Johnson',
+        'name': 'SADMAN ZAHID',
         'role': 'Medical',
         'distance': '75m',
         'status': 'Available',
@@ -43,7 +45,7 @@ class NearbyPeopleScreen extends StatelessWidget {
         'isHelp': false,
       },
       {
-        'name': 'James Wilson',
+        'name': 'TABIB ARHAM',
         'role': 'Coordinator',
         'distance': '100m',
         'status': 'Needs Help',
@@ -127,9 +129,24 @@ class NearbyPeopleScreen extends StatelessWidget {
                   Container(
                     height: 120,
                     alignment: Alignment.center,
-                    child: const Text(
-                      'Network Graph Here',
-                      style: TextStyle(color: Colors.grey),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(12),
+                      child: FlutterMap(
+                        options: MapOptions(
+                          initialCenter: LatLng(
+                            23.8103,
+                            90.4125,
+                          ), // Example: Dhaka
+                          initialZoom: 15,
+                        ),
+                        children: [
+                          TileLayer(
+                            urlTemplate:
+                                'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                            subdomains: ['a', 'b', 'c'],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                   const SizedBox(height: 12),
@@ -329,6 +346,7 @@ class _NearbyPersonCard extends StatelessWidget {
                           onPressed: () {},
                           style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xFFE31837),
+                            foregroundColor: Colors.white,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8),
                             ),
@@ -340,6 +358,7 @@ class _NearbyPersonCard extends StatelessWidget {
                           onPressed: () {},
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.blue,
+                            foregroundColor: Colors.white,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8),
                             ),

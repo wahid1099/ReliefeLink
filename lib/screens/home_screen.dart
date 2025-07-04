@@ -16,6 +16,7 @@ import 'package:relieflink/widgets/sync_status_card.dart';
 import 'package:relieflink/screens/profile_screen.dart';
 import 'package:relieflink/screens/nearby_people_screen.dart';
 import 'package:relieflink/screens/issues_screen.dart';
+import 'package:relieflink/screens/chat_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -156,37 +157,89 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                   const Spacer(),
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 8,
-                      vertical: 4,
-                    ),
-                    decoration: BoxDecoration(
-                      color:
-                          _meshService?.isActive == true
-                              ? Colors.green
-                              : Colors.grey,
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Icon(
-                          _meshService?.isActive == true
-                              ? Icons.bluetooth_connected
-                              : Icons.bluetooth_disabled,
-                          color: Colors.white,
-                          size: 16,
-                        ),
-                        const SizedBox(width: 4),
-                        Text(
-                          '${_nearbyUsers.length}',
-                          style: const TextStyle(
+                  GestureDetector(
+                    onTap: () {
+                      if (_nearbyUsers.isNotEmpty) {
+                        showDialog(
+                          context: context,
+                          builder:
+                              (context) => AlertDialog(
+                                title: const Text('Nearby Users'),
+                                content: SizedBox(
+                                  width: double.maxFinite,
+                                  child: ListView.builder(
+                                    shrinkWrap: true,
+                                    itemCount: _nearbyUsers.length,
+                                    itemBuilder: (context, index) {
+                                      final user = _nearbyUsers[index];
+                                      return ListTile(
+                                        leading: const Icon(Icons.person),
+                                        title: Text(user.name),
+                                        subtitle: Text(
+                                          'Distance: ${user.distance.toStringAsFixed(2)} km',
+                                        ),
+                                        trailing: Text(user.status.name),
+                                      );
+                                    },
+                                  ),
+                                ),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () => Navigator.pop(context),
+                                    child: const Text('Close'),
+                                  ),
+                                ],
+                              ),
+                        );
+                      } else {
+                        showDialog(
+                          context: context,
+                          builder:
+                              (context) => AlertDialog(
+                                title: const Text('Nearby Users'),
+                                content: const Text('No users found.'),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () => Navigator.pop(context),
+                                    child: const Text('Close'),
+                                  ),
+                                ],
+                              ),
+                        );
+                      }
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 4,
+                      ),
+                      decoration: BoxDecoration(
+                        color:
+                            _meshService?.isActive == true
+                                ? Colors.green
+                                : Colors.grey,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(
+                            _meshService?.isActive == true
+                                ? Icons.bluetooth_connected
+                                : Icons.bluetooth_disabled,
                             color: Colors.white,
-                            fontSize: 12,
+                            size: 16,
                           ),
-                        ),
-                      ],
+                          const SizedBox(width: 4),
+                          Text(
+                            '${_nearbyUsers.length}',
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 12,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ],
@@ -287,6 +340,8 @@ class _HomeScreenState extends State<HomeScreen> {
       const ProfileScreen(),
       // Issues Screen
       const IssuesScreen(),
+      // Chat Screen
+      const ChatScreen(),
     ];
     return Scaffold(
       body: screens[_selectedIndex],
@@ -296,6 +351,7 @@ class _HomeScreenState extends State<HomeScreen> {
           BottomNavigationBarItem(icon: Icon(Icons.people), label: 'Nearby'),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
           BottomNavigationBarItem(icon: Icon(Icons.warning), label: 'Issues'),
+          BottomNavigationBarItem(icon: Icon(Icons.chat), label: 'Chat'),
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: const Color(0xFFE31837),

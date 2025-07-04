@@ -10,10 +10,12 @@ class MeshService {
   Timer? _scanTimer;
   bool _isMeshActive = false;
   Position? _currentPosition;
+  List<NearbyUser> _nearbyUsers = [];
 
   MeshService({required this.onUsersUpdated});
 
   bool get isActive => _isMeshActive;
+  List<NearbyUser> getNearbyUsers() => List.unmodifiable(_nearbyUsers);
 
   void startMeshNetwork() {
     _isMeshActive = true;
@@ -73,6 +75,7 @@ class MeshService {
         );
       }
 
+      _nearbyUsers = users;
       onUsersUpdated(users);
     } catch (e) {
       print('Error updating nearby users: $e');
