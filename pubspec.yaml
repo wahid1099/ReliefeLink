@@ -18,6 +18,7 @@ dependencies:
   cupertino_icons: ^1.0.8
   latlong2: ^0.9.1
   flutter_blue_plus: ^1.35.4
+  flutter_dotenv: ^5.0.2
 
 dev_dependencies:
   flutter_test:

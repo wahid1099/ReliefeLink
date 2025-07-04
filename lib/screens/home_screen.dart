@@ -13,6 +13,9 @@ import 'package:relieflink/services/mesh_service.dart';
 import 'package:relieflink/widgets/emergency_type_selector.dart';
 import 'package:relieflink/widgets/offline_map_card.dart';
 import 'package:relieflink/widgets/sync_status_card.dart';
+import 'package:relieflink/screens/profile_screen.dart';
+import 'package:relieflink/screens/nearby_people_screen.dart';
+import 'package:relieflink/screens/issues_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -32,6 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
   double _downloadProgress = 0.0;
   String _selectedEmergencyType = 'Injury';
   List<models.NearbyUser> _nearbyUsers = [];
+  int _selectedIndex = 0;
 
   @override
   void initState() {
@@ -121,10 +125,17 @@ class _HomeScreenState extends State<HomeScreen> {
     // Implement emergency alert sending logic
   }
 
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
+    final List<Widget> screens = [
+      // Main Home content (existing)
+      SafeArea(
         child: Column(
           children: [
             // Emergency Alert Header
@@ -181,7 +192,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
             ),
-
             // Main Content
             Expanded(
               child: SingleChildScrollView(
@@ -205,7 +215,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                     const SizedBox(height: 24),
-
                     const Text(
                       'Type of Emergency',
                       style: TextStyle(
@@ -221,7 +230,6 @@ class _HomeScreenState extends State<HomeScreen> {
                               setState(() => _selectedEmergencyType = type),
                     ),
                     const SizedBox(height: 24),
-
                     const Text(
                       'Optional Message',
                       style: TextStyle(
@@ -245,7 +253,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       maxLines: 4,
                     ),
                     const SizedBox(height: 24),
-
                     OfflineMapCard(
                       currentPosition:
                           _currentPosition != null
@@ -262,9 +269,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       mapController: _mapController,
                       onUserTap: _showUserDetails,
                     ),
-
                     const SizedBox(height: 24),
-
                     SyncStatusCard(
                       isMeshActive: _meshService?.isActive ?? false,
                       nearbyUsersCount: _nearbyUsers.length,
@@ -275,6 +280,28 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ],
         ),
+      ),
+      // Nearby People Screen
+      const NearbyPeopleScreen(),
+      // Profile Screen
+      const ProfileScreen(),
+      // Issues Screen
+      const IssuesScreen(),
+    ];
+    return Scaffold(
+      body: screens[_selectedIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+          BottomNavigationBarItem(icon: Icon(Icons.people), label: 'Nearby'),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
+          BottomNavigationBarItem(icon: Icon(Icons.warning), label: 'Issues'),
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: const Color(0xFFE31837),
+        unselectedItemColor: Colors.grey,
+        onTap: _onItemTapped,
+        type: BottomNavigationBarType.fixed,
       ),
     );
   }
