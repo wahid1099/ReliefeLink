@@ -17,9 +17,17 @@ ReliefLink is an offline-first emergency coordination platform designed to assis
 
 ## 📱 Screenshots
 
-| Home Screen                        | Map View                          | Chat UI                            |
+| splash Screen                      | Choose role                       | Home Screen with map view UI       |
 | ---------------------------------- | --------------------------------- | ---------------------------------- |
-| ![Home](assets/screenshots/s1.png) | ![Map](assets/screenshots/s2.png) | ![Chat](assets/screenshots/s8.png) |
+| ![Home](assets/screenshots/s1.png) | ![Map](assets/screenshots/s2.png) | ![Chat](assets/screenshots/s3.png) |
+
+| Nearby People                      | Profile                           | Issues                             |
+| ---------------------------------- | --------------------------------- | ---------------------------------- |
+| ![Home](assets/screenshots/s4.png) | ![Map](assets/screenshots/s5.png) | ![Chat](assets/screenshots/s6.png) |
+
+| Nearby People                      | Chat with nearby people           |
+| ---------------------------------- | --------------------------------- |
+| ![Home](assets/screenshots/s7.png) | ![Map](assets/screenshots/s8.png) |
 
 > Make sure you place your images in: `assets/screenshots/`
 
