@@ -35,7 +35,7 @@ ReliefLink is an offline-first emergency coordination platform designed to assis
 
 ## 🎥 Demo Video
 
-[![Watch the demo](https://img.youtube.com/vi/YOUR_VIDEO_ID/0.jpg)](https://www.youtube.com/watch?v=YOUR_VIDEO_ID)
+[![Watch the demo](https://img.youtube.com/vi/YOUR_VIDEO_ID/0.jpg)](https://youtu.be/s_YuOxWBtZQ)
 
 > Replace `YOUR_VIDEO_ID` with the actual YouTube video ID.  
 > Or upload the video to GitHub and use a relative path if it’s short.
