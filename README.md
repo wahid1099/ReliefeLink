@@ -37,7 +37,13 @@ ReliefLink is an offline-first emergency coordination platform designed to assis
 
 🎥 [Watch Demo Video](assets/screeenshot/screen_record.webm)
 
----
+
+https://github.com/user-attachments/assets/18602e38-4e07-4b5b-a46e-c75dafd042c6
+
+
+
+
+
 
 ## 🛠️ Tech Stack
 
